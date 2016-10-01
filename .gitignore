@@ -30,5 +30,11 @@
 *.out
 *.app
 
+# Executables
+parser.c
+parser.h
+parser.output
+scanner.c
+
 trab2
 *~

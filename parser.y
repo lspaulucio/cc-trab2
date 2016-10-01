@@ -162,7 +162,7 @@ arith_op:	PLUS
 
 void yyerror (char const *s)
 {
-	printf("PARSE ERROR (%d): %s\n" yylineno, s);
+	printf("PARSE ERROR (%d): %s\n", yylineno, s);
 }
 
 int main()

@@ -89,9 +89,9 @@ STRING \".*\"
 {NUM} {return NUM;}
 {ID} {return ID;}
 {STRING} { return STRING;}
+"\n"            yylineno++; /* eat up a single line */
 
 [ \t]+          /* eat up whitespace */
-"\n"            yylineno++; /* eat up a single line */
 
 "//"                 BEGIN(L_COMMENT); /* line comments */
 <L_COMMENT>[^\n]* /* eat anything that’s not a \n */
@@ -100,7 +100,7 @@ STRING \".*\"
 "/*"                 BEGIN(ML_COMMENT); /* multi-line comments */
 <ML_COMMENT>[^\n] /* eat anything that’s not a \n */
 <ML_COMMENT>"\n"    yylineno++;
-<ML_COMMENT>"*/"    BEGIN(INITIAL);
+<ML_COMMENT>"*/"\n    BEGIN(INITIAL);
 
 . {process_error();}
 

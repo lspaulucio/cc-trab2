@@ -26,7 +26,7 @@ extern int yylineno;
 %}
 
 %token ELSE IF INPUT INT OUTPUT RETURN VOID WHILE WRITE PLUS MINUS TIMES OVER LT LE GT GE EQ NEQ ASSIGN SEMI COMMA LPAREN RPAREN LBRACK RBRACK LBRACE RBRACE NUM ID STRING
-%left LT LE GT NEQ
+%left LT LE GT GE EQ NEQ
 %left PLUS MINUS  /* Ops associativos a esquerda. */
 %left TIMES OVER  /* Mais para baixo maior precedencia. */
 
@@ -90,7 +90,7 @@ stmt:	assign_stmt
 	|	func_call SEMI
 ;
 
-assign_stmt:	lval EQ arith_expr SEMI
+assign_stmt:	lval ASSIGN arith_expr SEMI
 ;
 
 lval:	ID
@@ -145,19 +145,17 @@ bool_op: 	LT
 		|	NEQ
 ;
 
-arith_expr: arith_expr arith_op arith_expr
-		|	LPAREN arith_expr RPAREN
+arith_expr: LPAREN arith_expr RPAREN
 		|	lval
 		|	input_call
 		|	user_func_call
-		|	NUM
+        |   LPAREN PLUS RPAREN
+        |   LPAREN MINUS RPAREN
+        |   LPAREN TIMES RPAREN
+        |   LPAREN OVER RPAREN
+        |	NUM
 ;
 
-arith_op:	PLUS
-		|	MINUS
-		|	TIMES
-		|	OVER
-;
 %%
 
 void yyerror (char const *s)
@@ -167,7 +165,7 @@ void yyerror (char const *s)
 
 int main()
 {
-  //yydebug = 1; // Enter debug mode.
+  yydebug = 1; // Enter debug mode.
   if(!yyparse())
   	printf("PARSE SUCESSFUL!\n");
   return 0;

@@ -11,8 +11,9 @@
 %{
     #include <stdio.h>
     #include <stdlib.h>
-    #include "token.h"
+    #include "parser.h"
 
+    void process(const char*);
 	void process_error();
 %}
 
@@ -106,8 +107,19 @@ STRING \".*\"
 
 %%
 
+void process(const char* token)
+	{
+		printf("%d: %s -> %s\n",yylineno, yytext, token);
+	}
+
 void process_error()
 {
     printf("SCANNING ERROR (%d): Unknown symbol %c\n", yylineno, yytext[0]);
     exit(1);
 }
+
+/*int main()
+{
+    yylex();
+    return 0;
+}*/

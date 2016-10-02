@@ -19,8 +19,8 @@ done
 for infile in `ls $IN/*$EXTENSION`
 do
 	base=$(basename $infile)
-	outfile=$OUT/${base/$EXTENSION/.out}
-    myout=$CORRECT_OUT/${base/$EXTENSION/.out}
+	myout=$OUT/${base/$EXTENSION/.out}
+    outfile=$CORRECT_OUT/${base/$EXTENSION/.out}
 	echo -e "\nTeste $base"
     if diff $myout $outfile
         then

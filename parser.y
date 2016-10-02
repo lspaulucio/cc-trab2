@@ -68,8 +68,8 @@ param_list:	param_list COMMA param
 		|	param
 ;
 
-param:	INT ID SEMI
-	|	INT ID LBRACK NUM RBRACK
+param:	INT ID
+	|	INT ID LBRACK RBRACK
 
 var_decl_list:	var_decl_list var_decl
 			|	var_decl
@@ -149,10 +149,10 @@ arith_expr: LPAREN arith_expr RPAREN
 		|	lval
 		|	input_call
 		|	user_func_call
-        |   LPAREN PLUS RPAREN
-        |   LPAREN MINUS RPAREN
-        |   LPAREN TIMES RPAREN
-        |   LPAREN OVER RPAREN
+        |   arith_expr PLUS arith_expr
+        |   arith_expr MINUS arith_expr
+        |   arith_expr TIMES arith_expr
+        |   arith_expr OVER arith_expr
         |	NUM
 ;
 
@@ -165,7 +165,7 @@ void yyerror (char const *s)
 
 int main()
 {
-  yydebug = 1; // Enter debug mode.
+  //yydebug = 1; // Enter debug mode.
   if(!yyparse())
   	printf("PARSE SUCESSFUL!\n");
   return 0;

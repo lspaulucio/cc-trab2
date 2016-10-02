@@ -33,7 +33,7 @@ typedef enum {
 	RBRACE,
 	NUM,
 	ID,
-	STRING,
+	STRING
 } TokenType;
 
 // const char* STRING_TOKEN[] = {

@@ -1,3 +1,4 @@
+AUTHOR=LeonardoPaulucio
 
 all: bison flex gcc
 	@echo "Done."
@@ -13,6 +14,9 @@ gcc: scanner.c parser.c
 
 test: all
 	./test.sh
+
+tar: clean
+	tar -cvzf $(AUTHOR).tar.gz Makefile parser.y scanner.l
 
 clean:
 	@rm -f *.o *.output scanner.c parser.h parser.c parser trab2

@@ -70,6 +70,7 @@ param_list:	param_list COMMA param
 
 param:	INT ID
 	|	INT ID LBRACK RBRACK
+;
 
 var_decl_list:	var_decl_list var_decl
 			|	var_decl
@@ -103,6 +104,7 @@ if_stmt:	IF LPAREN bool_expr RPAREN block
 ;
 
 block:	LBRACE opt_stmt_list RBRACE
+;
 
 while_stmt: WHILE LPAREN bool_expr RPAREN block
 ;
@@ -126,6 +128,7 @@ write_call: WRITE LPAREN STRING RPAREN
 ;
 
 user_func_call:	ID LPAREN opt_arg_list RPAREN
+;
 
 opt_arg_list:	%empty
 			|	arg_list
@@ -136,6 +139,7 @@ arg_list: 	arg_list COMMA arith_expr
 ;
 
 bool_expr:	arith_expr bool_op arith_expr
+;
 
 bool_op: 	LT
 		|	LE
